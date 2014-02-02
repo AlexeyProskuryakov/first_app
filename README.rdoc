@@ -1,2 +1,0 @@
-Hello this is first app in railstutorial.
-This have only one profit - my learning in rails.
