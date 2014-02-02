@@ -1,8 +1,5 @@
-<<<<<<< HEAD
+
 DemoApp::Application.routes.draw do
-=======
-FirstApp::Application.routes.draw do
->>>>>>> 7d723012c519ab1225109f09f621ee9020c3545e
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
