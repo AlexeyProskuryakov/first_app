@@ -15,6 +15,7 @@ group :test do
   gem 'capybara', '2.1.0'
   gem 'libnotify','0.8.0'
   gem 'spork-rails', '4.0.0'
+  gem 'factory_girl_rails', '4.2.1'
 end
 
 gem 'bcrypt-ruby', '~> 3.0.0'

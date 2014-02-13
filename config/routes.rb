@@ -1,6 +1,6 @@
 DemoApp::Application.routes.draw do
   
-  
+  resources :users
   root "static_pages#home"
   match '/help', to: "static_pages#help", via:'get' 
   match '/about_us', to: "static_pages#about_us", via:'get' 
