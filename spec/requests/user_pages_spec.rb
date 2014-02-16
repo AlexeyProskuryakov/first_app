@@ -10,8 +10,8 @@ describe "UserPages" do
 		it {should have_title(user.name)}
 	end
 	
-	describe "signup page" do
-		before { visit signup_path }
+	describe "sign up page" do
+		before { visit sign_up_path }
 		let(:submit) {"Create my account"}
 
 		it {should have_content('Sign up')}
@@ -43,7 +43,8 @@ describe "UserPages" do
 				before {click_button submit}
 				let(:user) {User.find_by(email: 'a@a.ru')}
 				it {should have_title(user.name)}
-				it {should have_selector('div.alert.alert-success', text: 'Welcome')}
+				it {should have_link("Sign out")}
+				it {should have_success_message("Welcome")}
 			end
 		end
 	end
