@@ -38,7 +38,9 @@ describe "AuthenticationPages" do
 
 			describe "for non-signed-in users" do
 				let(:user) { FactoryGirl.create(:user) }
-
+				it {should_not have_link('Profile')}
+				it {should_not have_link('Settings')}
+				
 				describe "in the Users controller" do
 
 					describe "visiting the edit page" do
