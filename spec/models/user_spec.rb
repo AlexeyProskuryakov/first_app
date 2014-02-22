@@ -13,10 +13,28 @@ describe User do
 	it { should respond_to(:password_confirmation)}
 	it { should respond_to(:authenticate)}
 	it { should respond_to(:remember_token)}
+	it { should respond_to(:microposts)}
 	it { should respond_to(:admin)}
 	it { should be_valid}
 	it { should_not be_admin}
 
+	describe "micropost associations" do 
+		before {@user.save}
+		let!(:older_micropost){FactoryGirl.create(:micropost, user:@user, created_at:1.day.ago)}
+		let!(:newer_micropost){FactoryGirl.create(:micropost, user:@user, created_at:1.hour.ago)}
+		it "should right microposts in right order" do
+			expect(@user.microposts.to_a).to eq [newer_micropost,older_micropost]
+		end
+
+		it "should destroy associated microposts" do
+			microposts = @user.microposts.to_a
+			@user.destroy
+			expect(microposts).not_to be_empty
+			microposts.each do |micropost| 
+				expect(Micropost.where(id:micropost.id)).to be_empty
+			end
+		end
+	end
 	describe "when admin is on" do 
 		before do 
 			@user.save!
