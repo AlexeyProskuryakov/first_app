@@ -8,7 +8,6 @@ group :development do
   gem 'rspec-rails', '2.13.1'
   gem 'guard-rspec', '2.5.0'
   gem 'guard-spork'
-  gem 'faker', '1.1.2'
 end
 
 group :test do
@@ -21,6 +20,7 @@ group :test do
   gem 'database_cleaner', github: 'bmabey/database_cleaner'
 end
 
+gem 'faker', '1.1.2'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'sass-rails', '4.0.1'
