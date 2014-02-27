@@ -16,6 +16,22 @@ describe "Static pages" do
 		let(:page_title) {''}
 		it_should_behave_like 'all static pages'
 		it {should_not have_title("Home")}
+		
+		describe "for signed-in users" do
+			let(:user) { FactoryGirl.create(:user) }
+			before do
+				FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")
+				FactoryGirl.create(:micropost, user: user, content: "Dolor sit amet")
+				sign_in user
+				visit root_path
+			end
+
+			it "should render the user's feed" do
+				user.feed.each do |item|
+					expect(page).to have_selector("li##{item.id}", text: item.content)
+				end
+			end
+		end
 	end
 
 	describe "Help page" do
@@ -48,19 +64,19 @@ describe "Static pages" do
 		expect(page).to have_title(full_title('About Us'))
 
 		click_link "Help"
-	    expect(page).to have_title(full_title('Help'))
-	    
-	    click_link "Contact"
-	    expect(page).to have_title(full_title('Contact'))
-	    
-	    click_link "Home"
-	    expect(page).to have_title(full_title(''))
+		expect(page).to have_title(full_title('Help'))
 
-	    click_link "Sign up now!"
-	    expect(page).to have_title(full_title('Sign up'))
-	    
-	    click_link "sample app"
-	    expect(page).to have_title(full_title(''))
+		click_link "Contact"
+		expect(page).to have_title(full_title('Contact'))
+
+		click_link "Home"
+		expect(page).to have_title(full_title(''))
+
+		click_link "Sign up now!"
+		expect(page).to have_title(full_title('Sign up'))
+
+		click_link "sample app"
+		expect(page).to have_title(full_title(''))
 	end
 
 end
