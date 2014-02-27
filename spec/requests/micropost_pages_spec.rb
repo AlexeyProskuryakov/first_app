@@ -31,5 +31,22 @@ describe "Micropost Pages" do
 				expect { click_link "delete" }.to change(Micropost, :count).by(-1)
 			end
 		end
+		describe "as incorrect user" do
+			before do 
+				another_user = FactoryGirl.create(:user)
+				FactoryGirl.create(:micropost, user: another_user)
+				visit user_path(another_user)	
+			end
+			it {should_not have_link('delete')}
+		end
+	end
+	describe "microposts count and pagination" do 
+		before do
+			another_user = FactoryGirl.create(:user)
+			31.times {FactoryGirl.create(:micropost, user: another_user)}
+			visit user_path(another_user)
+		end
+		it {should have_content('31')}
+		it {should have_selector('div.pagination')}
 	end
 end
